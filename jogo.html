@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css">
+		.bola{
+			width: 50px;
+			height: 50px;
+			background-color: black;
+			border-radius: 25px;
+			position: absolute;
+		}
+		.pontos{
+			width: 100px;
+			height: 50px;
+			padding: 0;
+			margin: 0;
+			text-align: center;
+			line-height: 50px;
+			font-weight: bolder;
+			background-color: black;
+			color:white;
+		}
+		.btn{
+			width: 70px;
+			height: 40px;
+			margin: 0;
+			padding: 0;
+			background-color: red;
+		}
+	</style>
+	<script type="text/javascript">
+		var ponto = 0;
+		var tempo;
+		function btnJogo(){
+			//criar o botão e colocar a classe btn
+			var botao = document.createElement('button');
+			botao.setAttribute("class","btn");
+			botao.setAttribute("id","botao")
+			botao.setAttribute("onclick","terminarJogo()");
+			//colocar o botão dentro do documento
+			document.body.appendChild(botao);
+		}
+
+		//criar um função contadora de pontos
+		function contarPontos(){
+			//criar o elemento p com a classe pontos
+			var pontos = document.createElement('p');
+			pontos.setAttribute("class","pontos");
+			pontos.setAttribute("id","contar");
+	
+			//colocar o p dentro do documento
+			document.body.appendChild(pontos);
+		}
+
+		function addBola(){
+			// criando uma div e adicionando a classe bola a ela//
+			var bola  = document.createElement("div");
+			bola.setAttribute("class","bola");
+			
+			//chamando a função contar pontos//
+
+			//gerando as posições da bola
+			var p1 = Math.floor(Math.random()*800);
+			var p2 = Math.floor(Math.random()*700);
+			//gerando os valores das cores//
+			var cor1 = Math.round(Math.random()*9);
+			var cor2 = Math.round(Math.random()*9);
+			var cor3 = Math.round(Math.random()*9);
+			
+			
+			//adicionando as posições da bola e colocando cores diferentes em cada uma delas//
+			bola.setAttribute("style", "left:"+p1+"px; top:"+p2+"px;background-color:#"+cor1+cor2+cor3+";");
+			//adicionanado a função estourar na bola
+			bola.setAttribute("onclick", "estourar(this)");
+			//adicionando a função para contar os pontos//
+			bola.setAttribute("onmousedown","aumentarPontos()");
+
+			//criando a bola dentro do documento
+			document.body.appendChild(bola);
+		}
+
+		function estourar(objeto){
+			//removendo a bola que foi clicada
+			document.body.removeChild(objeto);
+		}
+
+		function terminarJogo(){
+			alert("Jogo Finalizado \nSua Pontuação foi: "+ponto+" pontos");
+			//Parando o setInterval() 
+			clearInterval(tempo);
+		}
+		
+		function aumentarPontos(){
+			//aumentando a quantidade de pontos a cada clique
+			ponto = ponto + 5;
+			//colocando o valor dos pontos no p
+			document.getElementById('contar').innerHTML = "Pontos: "+ponto;
+		}
+
+		//onde roda o rotina do jogo
+		function iniciarJogo(){
+			alert("Olá Seja Bem Vindo\nClique em OKAY para começar\n Para terminar clique no botão vermelho");
+			//inserindo o campo de contagem de pontos
+			contarPontos();
+			//inserir o botão para finalizar o jogo
+			btnJogo();
+			//criando um intervalo de tempo em milisengundos que vai executar a função//
+			tempo = setInterval(addBola,600);
+			}
+		
+	</script>
+</head>
+<body onload="iniciarJogo()">
+	
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">		
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Agenda</title>
+	<style type="text/css">
+		label{
+			margin-left: 5px;
+		}
+		fieldset{
+			position:relative;
+			width:600px; 
+			margin: 0 auto;
+		}
+		fieldset table tr{
+			width:600px;
+			margin:0 auto;
+		}
+		fieldset table tr td{
+			text-align:center;
+			width: 200px;
+			color:red;
+		}
+	</style>
+</head>
+<body onload="rotina()">
+	<fieldset>
+		<legend>Agenda</legend>
+		<label>Nota:</label>
+		<input type="text" name="nota" required id="agenda_nota" maxlength="20">
+		<label>Data:</label>
+		<input type="time" id="agenda_hora" required>
+		<input type="date" id="agenda_data" required>
+		<input type="button" value="Salvar" onclick="agendarDia()">
+	</fieldset>
+
+	<fieldset>
+		<legend>Datas</legend>
+		<table>
+			<thead>
+				<tr>
+					<td>Data Marcada</td>
+					<td>Hora Marcada</td>
+					<td>Nota:</td>
+				</tr>
+			</thead>
+			<tbody id="agenda_agendados">
+				
+			</tbody>
+		</table>
+	</fieldset>
+	<div id="relogio"></div>
+	<script type="text/javascript">
+		//criando os arrays onde serão colocados os valores das datas armazenadas
+		var notaArray =  new Array();
+		var horaArray =  new Array();
+		var dataArray =  new Array();
+		//criando unidade de tempo para atualizar o relogio 
+		var tempo;
+		
+		function rotina(){
+			//mostrar o relogio no canto da tela
+			tempo = setInterval(apresentarRelogio, 1000);
+			// vai verificar se existe alguma data que bate com o dia atual
+			setInterval(validarDatas,10000);
+
+		}
+
+		function apresentarRelogio(){
+			var data =  new Date();
+			document.getElementById('relogio').style = 'position: absolute;top: 2px;left:2px;width: 150px;height: 30px;background-color: #ccc;';
+			document.getElementById('relogio').style.fontSize = '20px';
+			document.getElementById('relogio').style.paddingTop = '10px';
+			document.getElementById('relogio').style.textAlign = 'center';
+			document.getElementById('relogio').style.border = '1px solid black';
+			//formatação da hora
+			
+			//HORA
+			if(data.getHours() < 10){
+				document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds(); 
+				
+				//MINUTOS
+				if(data.getMinutes() < 10){
+					document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+'0'+data.getMinutes()+" : "+data.getSeconds();
+					
+					//SEGUNDOS
+					if (data.getSeconds() < 10) {
+						document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+'0'+data.getMinutes()+" : "+'0'+data.getSeconds();
+					} else {
+						document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+'0'+data.getMinutes()+" : "+data.getSeconds();
+					}
+
+				} else {
+					document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds();
+
+					//SEGUNDOS
+					if (data.getSeconds() < 10) {
+						document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+data.getMinutes()+" : "+'0'+data.getSeconds();
+					} else {
+						document.getElementById('relogio').innerHTML = '0'+data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds();
+					}
+				}
+
+			}else {
+				document.getElementById('relogio').innerHTML = data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds(); 
+				
+				//MINUTOS
+				if(data.getMinutes() < 10){
+					document.getElementById('relogio').innerHTML = data.getHours()+" : "+'0'+data.getMinutes()+" : "+data.getSeconds();
+					
+					//SEGUNDOS
+					if (data.getSeconds() < 10) {
+						document.getElementById('relogio').innerHTML = data.getHours()+" : "+'0'+data.getMinutes()+" : "+'0'+data.getSeconds();
+					} else {
+						document.getElementById('relogio').innerHTML = data.getHours()+" : "+'0'+data.getMinutes()+" : "+data.getSeconds();
+					}
+
+				} else {
+					document.getElementById('relogio').innerHTML = data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds();
+
+					//SEGUNDOS
+					if (data.getSeconds() < 10) {
+						document.getElementById('relogio').innerHTML = data.getHours()+" : "+data.getMinutes()+" : "+'0'+data.getSeconds();
+					} else {
+						document.getElementById('relogio').innerHTML = data.getHours()+" : "+data.getMinutes()+" : "+data.getSeconds();
+					}
+				}
+			}
+		}
+			
+		
+
+		function verificarAgenda(){
+			console.log("verificando se existem datas salvas");
+			if(notaArray.length == 0 && dataArray.length == 0 && horaArray.length == 0){
+				
+				//nenhuma data foi colocado na agenda, mostrar mensagem de vazio na tela
+				var texto = "<tr><td><b>Vazio!</b></td><td><b>Vazio!</b></td><td><b>Vazio!</b></td></tr>";
+				document.getElementById('agenda_agendados').innerHTML = texto;
+
+			}else{
+	
+				if(dataArray[i] != ''){
+					document.getElementById('agenda_agendados').innerHTML = '';
+					//criando os tds para mostrar das datas
+					var tds = "<td>"+dataArray[0]+"</td><td>"+horaArray[0]+"</td><td>"+notaArray[0]+"</td>";
+					//var cont = 0;
+					var informacoes = document.getElementById('agenda_agendados').value;
+					
+					for(var i = 0; i != dataArray.length; i++){
+						console.log("Teste de mostrar as datas");
+						document.getElementById('agenda_agendados').innerHTML += "<tr><b><td>"+dataArray[i]+"</td><td>"+horaArray[i]+"</td><td>"+notaArray[i]+"</td></b></tr>";
+					}
+				}	
+			}
+			
+		}
+
+		function agendarDia(){
+			console.log('teste')
+			var nota = String(document.getElementById('agenda_nota').value);
+			var dataLocal = String(document.getElementById('agenda_data').value);
+			var horaLocal = String(document.getElementById('agenda_hora').value);
+
+			//validação se o campo estiver vazio
+			if(nota.length == 0 && dataLocal.length == 0 && horaLocal.length == 0){
+				alert("Campos vazios, para adicionar uma data, preencha todos os campos");
+			}else {
+				//variaveis para comparar caso ele digite uma data que ja tenha se passado
+				var data =  new Date();
+				var hora_agr = Number(horaLocal.split(':')[0]);
+				var minuto_agr = Number(horaLocal.split(':')[1]);
+				var dia_agr = Number(dataLocal.split('-')[2]);
+				var mes_agr = Number(dataLocal.split('-')[1]);
+				var ano_agr = Number(dataLocal.split('-')[0]);
+				
+				//console.log(hora_agr);
+				//console.log(minuto_agr);
+				//console.log(mes_agr);
+				console.log(hora_agr);
+				console.log(data.getHours());
+
+				
+				//validação com poucas horas de diferença
+				if( (hora_agr - data.getHours() < 0) && (minuto_agr - data.getMinutes() < 0) ){
+					if( ( ano_agr >= data.getFullYear() ) && ( ( mes_agr >= (data.getMonth()+1) ) ) && (dia_agr > data.getDate()) ){
+						//adicionando os dados aos arrays
+						notaArray.push(nota);
+						horaArray.push(horaLocal);
+						dataArray.push(dataLocal);
+						//mensagem dee exito
+						alert("Dados inseridos com sucesso");
+					}else{			
+						//mostrar ao usuario que ele digitou datas antigas e setar os campos
+						alert("Datas inseridas de forma incorreta, por favor cheque data e/ou hora antes de prencher");
+						document.getElementById('agenda_data').value = '';
+						document.getElementById('agenda_hora').value = '';
+					}			
+				//validação se o ano e o mes e maior ou igual ao ano e mes atual		
+				}else if( ( ano_agr >= data.getFullYear() ) && ( ( mes_agr >= (data.getMonth()+1) ) ) && (dia_agr >= data.getDate()) ){
+					//adicionando os dados aos arrays
+						notaArray.push(nota);
+						horaArray.push(horaLocal);
+						dataArray.push(dataLocal);
+						//mensagem dee exito
+						alert("Dados inseridos com sucesso");
+				}else{			
+					//mostrar ao usuario que ele digitou datas antigas e setar os campos
+					alert("Datas inseridas de forma incorreta, por favor cheque data e/ou hora antes de prencher");
+					document.getElementById('agenda_data').value = '';
+					document.getElementById('agenda_hora').value = '';
+				}
+			}
+		}
+		
+
+		function validarDatas(){
+			console.log('teste1')
+	
+			//fazer a validação apenas se tiver algo no array 
+			if(dataArray.length != 0){
+				//criar a variavel data para a comparação
+				var dataAgr =  new Date();
+				//pegar os valores das datas e comparar com os valores da variavel dataAgora
+				for(var i = 0 ; i <= dataArray.length; i++){
+					//pegar os valores do array 
+					
+					//caso o vetor dataArray não estiver vazio, significa que exite dados no Array
+					if(dataArray[i] != ''){
+						//arrays de dados
+						var dataAgora = String(dataArray[i]);
+						var horaAgora = String(horaArray[i]);  
+						//variaveis de compararação
+						var hora_agr = Number(horaAgora.split(':')[0]);
+						var minuto_agr = Number(horaAgora.split(':')[1]);
+						var dia_agr = Number(dataAgora.split('-')[2]);
+						var mes_agr = Number(dataAgora.split('-')[1]);
+						var ano_agr = Number(dataAgora.split('-')[0]);
+
+						//comparando se as datas estão na hora de serem chamadas para alertar ao usuario que uma data marcada chegou
+						if( (hora_agr - dataAgr.getHours() == 1 ) && ( minuto_agr == dataAgr.getMinutes() ) && ( ano_agr == dataAgr.getFullYear() ) && ( mes_agr == (dataAgr.getMonth()+1) ) && ( dia_agr == dataAgr.getDate() ) ){
+							alert("Mensagem de Alerta\nNota: "+notaArray[i]+"\nHorario: "+horaAgora+"      Dia: Hoje\nTempo: Daqui a uma hora");
+								
+							notaArray[i] = '';
+							dataArray[i] = '';
+							horaArray[i] = '';	
+						}
+						//atualizar os dados na tabela
+						verificarAgenda();
+					}
+
+				}
+			}
+			verificarAgenda();
+		}
+		
+			
+
+
+	</script>
+</body>
+</html>

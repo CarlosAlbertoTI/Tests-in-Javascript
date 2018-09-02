@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Receitas</title>
+	<style type="text/css" media="screen">
+		.content-1{
+			float:left;
+		}
+		.content-1 input{
+			margin-bottom: 10px;
+		}
+		.content-2{
+			float:left;
+		}
+		.content-2 input{
+			margin-bottom: 10px;
+		}
+		.content-2 button{
+			margin-bottom: 10px;
+		}
+		.content-receita{
+			margin:0 auto;
+		}	
+	</style>
+</head>
+<body>	
+	<fieldset class="content-1">
+		<legend>Adicionar Receitas</legend>
+		<br>
+		<label>Nome da receita:</label>
+		<input type="text" id="nome_receita">
+		<br>
+		<label>Items da receita:</label>
+		<input type="text" id="item_receita">
+		<br>
+		<label>Tempo de Preparo:</label>
+		<input type="number" id="time_receita">
+		<br>
+		<button onclick="adicionarReceita()">Adicionar</button>
+	</fieldset>
+	<fieldset class="content-2">
+		<legend>Alterar Receitas</legend>
+		<br>
+		<label>Nome da receita:</label>
+		<input type="text" id="nome_altera">
+		<br>
+		<button onclick="alterarNome()">Alterar Nome</button>
+		<br>
+		<label>Items da receita:</label>
+		<input type="text" id="item_altera">
+		<br>
+		<button onclick="alterarItem()">Alterar Item</button>
+		<button onclick="excluirItem()">Excluir Item</button>
+		<button onclick="adicionarItem()">Adicionar Item</button>
+		<br>
+		<label>Tempo de Preparo:</label>
+		<input type="number" id="time_altera">
+		<br>
+		<button onclick="alterarTempo()">Alterar Tempo</button>
+	</fieldset>
+
+	<section class="content-receita" style="clear: both;">
+		<h2 id="title-receita"></h2>
+		<h4 id="subtitle-receita"></h4>
+		<ul id="listem-receita">
+			
+		</ul>
+		<p id="time-receita"></p>
+	</section>
+
+
+	<script type="text/javascript">
+		function adicionarReceita(){
+			var nome = document.getElementById('nome_receita').value; 
+			var item = document.getElementById('item_receita').value; 
+			var tempo = document.getElementById('time_receita').value;
+			var lista;
+
+			document.getElementById('title-receita').innerHTML = nome;
+
+			document.getElementById('subtitle-receita').innerHTML = "Lista de Ingredientes:";
+
+			var listaHTML = document.getElementById('listem-receita').innerHTML;
+			listaHTML = listaHTML +"<li><b>"+item+"</b></li>";
+			document.getElementById('listem-receita').innerHTML = listaHTML;
+			
+			document.getElementById('time-receita').innerHTML = "Tempo de preparo: "+tempo+" min";
+		}
+
+		function alterarNome(){
+			var nome = document.getElementById('nome_altera').value;
+			document.getElementById('title-receita').innerHTML = nome;
+		}
+		
+		function alterarItem(){
+			var item = document.getElementById('item_altera').value;
+
+			document.getElementById('listem-receita').innerHTML = '';
+			document.getElementById('listem-receita').innerHTML = "<li><b>"+item+"</b></li>";  
+		}
+
+		function adicionarItem(){
+			var item = document.getElementById('item_altera').value;
+
+			var listaHTML = document.getElementById('listem-receita').innerHTML;
+			listaHTML = listaHTML + "<li><b>"+item+"</b></li>";
+			document.getElementById('listem-receita').innerHTML = listaHTML;
+		}
+
+		function excluirItem(){
+			var item = document.getElementById('item_altera').value;
+			document.getElementById('listem-receita').innerHTML = '';
+		}
+
+		function alterarTempo(){
+			var tempo = parseInt(document.getElementById('time_altera').value);
+			document.getElementById('time-receita').innerHTML = "Tempo de preparo: "+tempo+" min";
+		}
+
+	</script>
+</body>
+</html>

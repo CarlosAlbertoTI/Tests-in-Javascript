@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="author" content="Carlos">
+	<meta name="keywords" content="content">
+	<meta http-equiv="refresh" content="content">
+	<title>Testes com formulario com JS</title>
+</head>
+<body>
+	<form>
+		<label>Nome </label>
+		<input type="text" name="nome" id="text_nome" placeholder="Digite seu nome...."  autofocus onblur="desfocou()" onkeyup="verificaCaracteres(this)">
+		<br>
+		<br>
+		<label>Idade</label>
+		<input type="number" name="idade" id="number_idade" placeholder="Digite sua idade.."  onblur="desfocouIdade()" >
+		<br>
+		<input type="submit" name="" value="Enviar" placeholder="Enviar">
+		
+
+
+	</form>
+	<script type="text/javascript">
+		function desfocou(){
+			var nome = document.getElementById('text_nome').value;
+			if (nome.length == 0) {
+				alert("Insira seu nome para terminar o formulario");
+			}else if(isNaN(nome) == false){
+				alert("Insira apenas caracteres neste campo");
+				document.getElementById('text_nome').value='';
+			}else{
+				alert("Parabéns você pode preencher o proximo campo");
+			}
+		}
+
+		function desfocouIdade(){
+			var idade = parseInt(document.getElementById('number_idade').value);
+			if (idade.length == 0) {
+				alert("Insira seu nome para terminar o formulario");
+			}else if(idade >= 100){	
+				alert("Não minta sua idade por favor, seja honesto(a)");
+			}
+		}
+
+		function verificaCaracteres(event){
+			var nome = document.getElementById('text_nome').value;
+			if(nome.length > 9){
+				alert("È permitido apenas 10 caracteres");
+				//pega o caractere e so mostra os 10 primeiros caracteres
+				event.value = event.value.substr(0,10);
+
+			}
+		}
+
+		
+	</script>
+
+</body>
+</html>

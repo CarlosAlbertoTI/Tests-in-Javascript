@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scaled=no" >
+	<meta http-equvi="X-UA-Compatible" content="IE=edge">
+	<title>Agenda</title>
+	<link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+	<main>
+		<header>
+			<div id="topo">
+				<div id="topo-int">
+
+					<div id="topo-int-left">
+						<h1>Agenda</h1>
+					</div>
+					<div id="topo-int-right">
+						<div id="relogio"></div>
+					</div>
+					
+				</div>
+			</div>
+			<div id="topo-2">
+				<div id="topo-2-int">
+					<div id="topo-2-left-side">
+						<h3>Formulario</h3>
+					</div>
+					<div id="topo-2-right-side">
+					</div>
+					<!-- preciso fazer um linha logo abaixo do formulario e do relogio  -->
+				</div>
+			</div>
+		</header>
+		<section>
+			<div id="corpo">
+				<div id="corpo-int">
+					<div id="formulario">
+						<label >Nota</label>
+						<input type="text" id ="add_nota" placeholder="Insira sua anotação aqui" autofocus required>
+						<label >Hora</label>
+						<input type="time" id ="add_time" required>
+						<label >Data</label>
+						<input type="date" id ="add_data" required>
+						<button id="enviarDados">Cadastrar</button>
+						<input type="Reset" value="Limpar">
+					</div>
+				</div>
+			</div>
+			<div id="corpo-2">
+				<div id="corpo-titulo">
+					<h3>Datas Salvas</h3>
+					<hr>
+				</div>
+				<div id="corpo-2-int">
+					<table>
+						<thead>
+							<tr>
+								<th>Nota</th>
+								<th>Hora</th>
+								<th>Data</th>
+							</tr>
+						</thead>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div id="footer-int">
+				<p><em>&copy Copyright.</em> Todos os diretos reservados a Carlos Interface</p>
+			</div>
+		</footer>
+	</main>
+<!-- JS -->
+<script src="JS/modeloAnotacao.js"></script>
+<script src="JS/criar-anotacao.js"></script>
+<script src="JS/validacaoDatas.js"></script>	
+<script src="JS/validacaoAdd.js"></script>
+<script src="JS/relogio.js"></script>
+<script src="JS/rotina.js"></script>
+<script src="JS/avaliarNotas.js"></script> 
+<!-- JS -->
+
+</body>
+</html>

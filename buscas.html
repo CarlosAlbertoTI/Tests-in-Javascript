@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Buscas com JS</title>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<input type="text" name="nome" id="buscaNome">
+	<button onclick="ProcurarNome()">Buscar</button>
+	<p id="msg"></p>
+
+
+	<script type="text/javascript">
+	// PROJETO DE LISTA DE CONTATOS COM BUSCA E EXCLUSÃO //
+ 	
+ 		var nomes = new Array();
+ 		nomes[0] = "Carlos Alberto";
+ 		nomes[1] = "Marcos Gabriel";
+            nomes[2] = "Juliana Custodio";
+            nomes[3] = "Ana Alice";
+            nomes[4] = "Pedro Lucas";
+ 			
+            var contador = 0;
+            var confirm_busca;
+ 			
+            // para buscar nomes
+       		function ProcurarNome(){
+                        try{
+             		 	var nome1 = document.getElementById('buscaNome').value;
+                              if(nome1 == ''){
+             		 			document.getElementById('msg').innerHTML = 'Digite um nome para Buscar';
+             		 	
+             			}else{	
+             	          	      for (var i = 0; i < nomes.length; i++) {
+             	          		      var ordem  = nomes[i].split(' '); //vai tranformar o nome em um array//
+             
+                       	 		      for(var y = 0; y <= ordem.length; y++){
+             			    	         var pesquisa  = ordem.indexOf(nome1); //vai procura o nome//
+             			      	           	 		
+             			      		if(pesquisa != -1){ 	      			
+             			      			document.getElementById('msg').innerHTML = "Nome pesquisado: "+nome1+"<br>Nome completo : "+nomes[i];
+                                                      confirm_busca = true;
+             			      	 		break;
+             		    			      }  
+             			      	}
+             			      }
+                                    if (confirm_busca != true) {
+                                       console.log("O nome : "+nome1+" não esta na lista");   
+                                    }
+
+                              }
+
+       			   		   
+ 			      }catch(erro){
+                              console.log("Erro: "+erro);
+                        }  
+                  }
+            
+ 		           	
+ 	</script> 
+	
+</body>
+</html>
